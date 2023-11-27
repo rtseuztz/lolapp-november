@@ -29,6 +29,7 @@ export default class SummonerBackingService {
 
     private async saveSummoner(summoner: Summoner): Promise<void> {
         // Save to DB
-        await this.dbClient.postSummoner(summoner);
+        console.log("Implement saveSummoner")
+        // await this.dbClient.postSummoner(summoner);
     }
 }

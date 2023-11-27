@@ -1,3 +1,4 @@
+import SummonerService from "@/AppService/Summoner"
 import { RiotAPIClient, Summoner } from "riot-node-api"
 export async function GET(
     request: Request,
@@ -5,8 +6,7 @@ export async function GET(
 ) {
     console.log("slug", params)
     const name = params.name
-    let client = new RiotAPIClient(process.env.API_KEY ?? "", 1, 1);
-    let summoner = await client.summoner.getByName(name);
-    console.log("summoner is ", summoner);
+    const service = new SummonerService();
+    const summoner = await service.getSummonerByName(name);
     return Response.json(summoner)
 }

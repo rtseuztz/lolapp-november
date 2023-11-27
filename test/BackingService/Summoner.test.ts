@@ -7,9 +7,6 @@ import { SpiedFunction } from "jest-mock";
 import { beforeEach } from "node:test";
 import { Summoner } from "riot-node-api";
 const summonerBackingService = new SummonerBackingService();
-const dbClient = new DBSummoner();
-const riotClient = new RiotSummoner();
-
 
 let dbClientMockGet = jest.spyOn(summonerBackingService.dbClient, 'getSummonerByName');
 let dbClientMockPost = jest.spyOn(summonerBackingService.dbClient, 'postSummoner');
