@@ -9,22 +9,18 @@ export default class SummonerBackingService {
         this.dbClient = new DBSummoner();
         this.riotClient = new RiotSummoner();
     }
-    public async getSummonerByName(name: string): Promise<Summoner> {
+    public async getSummonerByName(name: string): Promise<Summoner | null> {
         // Check DB
         // If not in DB, call Riot API
         // Save to DB
         // Return Summoner
-        let summoner: Summoner;
-        try {
-            summoner = await this.dbClient.getSummonerByName(name);
-        } catch (error) {
-            console.log(error)
+        let summoner: Summoner | null;
+        summoner = await this.dbClient.getSummonerByName(name);
+        if (summoner === null) {
             summoner = await this.riotClient.getSummonerByName(name);
-            await this.saveSummoner(summoner);
+            if (summoner) await this.saveSummoner(summoner);
         }
         return summoner;
-
-
     }
 
     private async saveSummoner(summoner: Summoner): Promise<void> {

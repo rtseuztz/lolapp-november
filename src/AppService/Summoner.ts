@@ -6,7 +6,7 @@ export default class SummonerService {
     constructor() {
         this.backingService = new SummonerBackingService();
     }
-    public async getSummonerByName(name: string): Promise<Summoner> {
+    public async getSummonerByName(name: string): Promise<Summoner | null> {
         const summoner = await this.backingService.getSummonerByName(name);
         return summoner;
     }

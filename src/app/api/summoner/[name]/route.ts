@@ -8,5 +8,8 @@ export async function GET(
     const name = params.name
     const service = new SummonerService();
     const summoner = await service.getSummonerByName(name);
+    if (summoner === null) {
+        return Response.json({ error: "Summoner not found" }, { status: 404 })
+    }
     return Response.json(summoner)
 }

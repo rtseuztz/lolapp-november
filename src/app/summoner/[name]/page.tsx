@@ -1,11 +1,10 @@
 "use client"
 import { useParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
-import { Summoner } from 'riot-node-api';
+import { Match, Summoner } from 'riot-node-api';
 
 export default function Page() {
     const { name }: { name: string } = useParams();
-    console.log(name);
     const [summoner, setSummoner] = useState<Summoner>()
     // Fetch summoner details from League of Legends API
     // Replace 'YOUR_API_KEY' with your actual API key
@@ -17,12 +16,13 @@ export default function Page() {
 
             // get games
             const gamesResponse = await fetch(`/api/summoner/${data.puuid}/games`);
+            const games = await gamesResponse.json() as Match[];
+            console.log(games);
         } catch (error) {
             console.error('Error fetching summoner details:', error);
         }
     };
     useEffect(() => {
-        console.log("i only go once")
         fetchSummonerDetails();
     }, []);
 

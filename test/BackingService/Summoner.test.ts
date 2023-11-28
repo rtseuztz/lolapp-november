@@ -37,7 +37,7 @@ describe("Testing by name", () => {
     test('getSummonerByName not in database, get from riot', async () => {
         dbClientMockGet.mockImplementation(async () => {
             // Provide an implementation for dbClient.getSummonerByName
-            throw new Error("Summoner not found");
+            return null;
         });
         riotClientMockGet.mockImplementation(async () => {
             // Provide an implementation for riotClient.getSummonerByName
@@ -57,14 +57,15 @@ describe("Testing by name", () => {
     test('summoner doesnt exist', async () => {
         dbClientMockGet.mockImplementation(async () => {
             // Provide an implementation for dbClient.getSummonerByName
-            throw new Error("Summoner not found");
+            return null;
         });
         riotClientMockGet.mockImplementation(async () => {
             // Provide an implementation for riotClient.getSummonerByName
-            throw new Error("Summoner not found");
+            return null;
         });
 
-        await expect(summonerBackingService.getSummonerByName(summonerName)).rejects.toThrowError("Summoner not found");
+        const summoner = await summonerBackingService.getSummonerByName(summonerName);
+        expect(summoner).toBe(null);
 
         expect(dbClientMockGet).toHaveBeenCalledWith(summonerName);
         expect(riotClientMockGet).toHaveBeenCalledWith(summonerName);
