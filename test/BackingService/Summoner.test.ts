@@ -1,16 +1,12 @@
 import SummonerBackingService from "@/BackingService/Summoner";
-import DBSummoner from "@/Data/DBSummoner";
-import RiotSummoner from "@/Data/RiotSummoner";
-import { expect, jest, test, describe } from '@jest/globals';
+import { expect, jest, test, describe, beforeEach } from '@jest/globals';
 import 'jest-fetch-mock';
-import { SpiedFunction } from "jest-mock";
-import { beforeEach } from "node:test";
 import { Summoner } from "riot-node-api";
 const summonerBackingService = new SummonerBackingService();
 
-let dbClientMockGet = jest.spyOn(summonerBackingService.dbClient, 'getSummonerByName');
-let dbClientMockPost = jest.spyOn(summonerBackingService.dbClient, 'postSummoner');
-let riotClientMockGet = jest.spyOn(summonerBackingService.riotClient, 'getSummonerByName')
+let dbClientMockGet = jest.spyOn(summonerBackingService['dbClient'], 'getSummonerByName');
+let dbClientMockPost = jest.spyOn(summonerBackingService['dbClient'], 'postSummoner');
+let riotClientMockGet = jest.spyOn(summonerBackingService['riotClient'], 'getSummonerByName')
 
 let mockSummoner = new Summoner(
     'testId',

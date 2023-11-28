@@ -12,9 +12,11 @@ export default function Page() {
     const fetchSummonerDetails = async () => {
         try {
             const response = await fetch(`/api/summoner/${name}`);
-            const data = await response.json();
+            const data = await response.json() as Summoner;
             setSummoner(data);
-            // Process and display summoner details here
+
+            // get games
+            const gamesResponse = await fetch(`/api/summoner/${data.puuid}/games`);
         } catch (error) {
             console.error('Error fetching summoner details:', error);
         }

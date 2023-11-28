@@ -3,8 +3,8 @@ import ISummonerData from "@/Data/Interfaces/ISummoner";
 import RiotSummoner from "@/Data/RiotSummoner"
 import { Summoner } from "riot-node-api";
 export default class SummonerBackingService {
-    dbClient: DBSummoner;
-    riotClient: ISummonerData;
+    private dbClient: DBSummoner;
+    private riotClient: ISummonerData;
     constructor() {
         this.dbClient = new DBSummoner();
         this.riotClient = new RiotSummoner();
