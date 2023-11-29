@@ -15,7 +15,7 @@ export default function Participant({ participant }: { participant: Participant 
     const textAlignment = win ? "text-right" : "text-left";
     return (
         <li key={participant.puuid} className={`flex ${win ? "flex-row-reverse" : ""}`}>
-            <Image src={"/profileIcons/" + participant.profileIcon + ".png"} width="64" height="64" alt="profile icon" className="w-10 h-10 rounded-full mr-4" />
+            <Image src={"/champions/" + participant.championName + ".png"} width="24" height="24" alt="profile icon" className="w-6 h-6 rounded-full mx-1" />
             <p className={`${textAlignment} mb-2 max-w-full text-ellipsis overflow-hidden w-full font-bold whitespace-nowrap`}>{participant.summonerName}</p>
         </li>
     );

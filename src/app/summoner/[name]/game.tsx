@@ -13,8 +13,8 @@ export default function Game({ game }: { game: Match }) {
         );
     }
     return (
-        <div className="flex flex-col items-center justify-center bg-gray-900 text-white w-full">
-            <div className="bg-gray-800 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 w-full text-center flex flex-col justify-center">
+        <div className="flex flex-col items-center justify-center  w-full">
+            <div className="bg-gray-800/30 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 w-full text-center flex flex-col justify-center">
                 <h1 className="text-4xl font-bold mb-4 text-blue-400">Match Details</h1>
                 <p className="mb-2">Game ID: <span className="font-bold">{game.info.gameId}</span></p>
                 <p className="mb-2">Game Mode: <span className="font-bold">{game.info.gameMode}</span></p>

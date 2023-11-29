@@ -9,7 +9,7 @@ export default function participantsBox({ participants }: { participants: parts[
 
     return (
         <div className="grid grid-cols-[49.5%_1%_49.5%] max-w-full justify-center">
-            <ul className="flex flex-col min-w-full w-5/12 bg-gradient-to-l from-green-400/20 to-transparent rounded-lg">
+            <ul className="pt-1 flex flex-col min-w-full w-5/12 bg-gradient-to-l from-green-400/20 to-transparent rounded-lg">
                 {winners.map((p) => {
                     return (
                         <Participant participant={p} />
@@ -20,7 +20,7 @@ export default function participantsBox({ participants }: { participants: parts[
             <div>
 
             </div>
-            <ul className="flex flex-col min-w-full bg-gradient-to-r from-red-400/20 to-transparent rounded-lg">
+            <ul className="pt-1 flex flex-col min-w-full bg-gradient-to-r from-red-400/20 to-transparent rounded-lg">
                 {losers.map((p) => {
                     return (
                         <Participant participant={p} />

@@ -5,8 +5,8 @@ async function refresh() {
     const version = await getVersion();
     const promises = [];
     promises.push(getChampions(version));
-    promises.push(getItems(version));
-    promises.push(getProfileIcons(version));
+    // promises.push(getItems(version));
+    // promises.push(getProfileIcons(version));
     // promises.push(getSplashSquare(version));
 
     await Promise.all(promises);
@@ -26,8 +26,15 @@ async function getChampions(version) {
     // Converts the array to an object with the ... (spread)
     const championsObj = { ...championsList };
     await writeFileSync("./champions.json", JSON.stringify(championsObj));
-    const championNames = Object.keys(championsJSON.data).map(id => championsJSON.data[id]);
-
+    const championNames = Object.keys(championsObj).map(id => championsObj[id]);
+    for (let i = 0; i < championNames.length; i++) {
+        let championIconURL = `https://ddragon.leagueoflegends.com/cdn/${version}/img/champion/${championNames[i]}.png`;
+        let championIconResponse = await fetch(championIconURL);
+        let arrayBuffer = await championIconResponse.arrayBuffer();
+        let championIconData = Buffer.from(arrayBuffer);
+        let championIconPath = `../../../public/champions/${championNames[i]}.png`;
+        await writeFileSync(championIconPath, championIconData);
+    }
 }
 
 async function getItems(version) {
