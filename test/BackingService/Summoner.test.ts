@@ -2,6 +2,7 @@ import SummonerBackingService from "@/BackingService/Summoner";
 import { expect, jest, test, describe, beforeEach } from '@jest/globals';
 import 'jest-fetch-mock';
 import { Summoner } from "riot-node-api";
+const { TextEncoder, TextDecoder } = require("util");
 const summonerBackingService = new SummonerBackingService();
 
 let dbClientMockGet = jest.spyOn(summonerBackingService['dbClient'], 'getSummonerByName');
@@ -37,7 +38,7 @@ describe("Testing by name", () => {
     test('getSummonerByName not in database, get from riot', async () => {
         dbClientMockGet.mockImplementation(async () => {
             // Provide an implementation for dbClient.getSummonerByName
-            return null;
+            return undefined;
         });
         riotClientMockGet.mockImplementation(async () => {
             // Provide an implementation for riotClient.getSummonerByName
@@ -45,7 +46,7 @@ describe("Testing by name", () => {
         });
         dbClientMockPost.mockImplementation(async () => {
             // Provide an implementation for dbClient.postSummoner
-            return mockSummoner
+            return true
         });
 
         const summoner = await summonerBackingService.getSummonerByName(summonerName);
@@ -57,15 +58,15 @@ describe("Testing by name", () => {
     test('summoner doesnt exist', async () => {
         dbClientMockGet.mockImplementation(async () => {
             // Provide an implementation for dbClient.getSummonerByName
-            return null;
+            return undefined;
         });
         riotClientMockGet.mockImplementation(async () => {
             // Provide an implementation for riotClient.getSummonerByName
-            return null;
+            return undefined;
         });
 
         const summoner = await summonerBackingService.getSummonerByName(summonerName);
-        expect(summoner).toBe(null);
+        expect(summoner).toBe(undefined);
 
         expect(dbClientMockGet).toHaveBeenCalledWith(summonerName);
         expect(riotClientMockGet).toHaveBeenCalledWith(summonerName);

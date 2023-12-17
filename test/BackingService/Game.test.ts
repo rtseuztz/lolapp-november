@@ -2,6 +2,7 @@ import GameBackingService from "@/BackingService/Game";
 import { expect, jest, test, describe, beforeEach } from '@jest/globals';
 import 'jest-fetch-mock';
 import { Match } from "riot-node-api";
+const { TextEncoder, TextDecoder } = require("util");
 const backingService = new GameBackingService();
 
 const dbClientMock = jest.spyOn(backingService['dbGameClient'], 'getGamesByIDs');
